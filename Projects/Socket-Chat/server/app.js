@@ -10,12 +10,16 @@ const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
 
-io.on('connection',(socket)=>{
-    console.log("New connection");
-    socket.on("disconnect",()=>{
-        console.log("User Disconnected");
-    });
-})
+io.on("connection", (socket) => {
+  console.log("New connection");
+  socket.on("disconnect", () => {
+    console.log("User Disconnected");
+  });
+  socket.on("join", ({ name, room }, callback) => {
+    console.log(name, room);
+  });
+});
+
 app.use(router);
- 
+
 server.listen(PORT, () => console.log(`Server started on ${PORT}`));
