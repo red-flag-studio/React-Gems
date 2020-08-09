@@ -8,8 +8,12 @@ export default function App() {
   useEffect(() => {
     alanBtn({
       key: ALAN_KEY,
-      onCommand: ({ command }) => {
-        if (command === "testCommand") alert("test executed");
+      onCommand: ({ command, articles }) => {
+        switch (command) {
+          case "newHeadlines":
+            console.log(articles);
+            break;
+        }
       },
     });
   }, []);
