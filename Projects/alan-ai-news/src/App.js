@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import alanBtn from "@alan-ai/alan-sdk-web";
 import NewsCards from "./Components/NewsCards/NewsCards";
+import useStyles from "./Styles";
 const ALAN_KEY =
   "a56d647ed7e285d954006626b6eefb772e956eca572e1d8b807a3e2338fdd0dc/stage";
 
 export default function App() {
+  const classes = useStyles();
   const [newsArticles, setNewsArticles] = useState([]);
   useEffect(() => {
     alanBtn({
@@ -12,6 +14,8 @@ export default function App() {
       onCommand: ({ command, articles }) => {
         switch (command) {
           case "newHeadlines":
+          case "termNews":
+          case "latestNews":
             setNewsArticles(articles);
             break;
         }
@@ -20,7 +24,13 @@ export default function App() {
   }, []);
   return (
     <div>
-      <h1>Alan AI News Application</h1>
+      <div className={classes.logoContainer}>
+        <img
+          src="https://alan.app/voice/images/previews/preview.jpg"
+          className={classes.alanLogo}
+          alt="Alan Logo"
+        />
+      </div>
       <NewsCards articles={newsArticles} />
     </div>
   );
