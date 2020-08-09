@@ -16,15 +16,15 @@ export default function NewsCard({
 }) {
   const classes = useStyles();
   return (
-    <Card>
-      <CardActionArea>
+    <Card className={classes.card}>
+      <CardActionArea href={url} target="_blank">
         <CardMedia
           className={classes.media}
           image={
             urlToImage || "https://alan.app/voice/images/previews/preview.jpg"
           }
         />
-        <div>
+        <div className={classes.details}>
           <Typography variant="body2" color="textSecondary" component="h2">
             {new Date(publishedAt).toDateString()}
           </Typography>
@@ -32,7 +32,7 @@ export default function NewsCard({
             {source.name}
           </Typography>
         </div>
-        <Typography gutterBottom variant="h5">
+        <Typography gutterBottom variant="h5" className={classes.title}>
           {title}
         </Typography>
         <CardContent>
@@ -40,8 +40,7 @@ export default function NewsCard({
             {description}
           </Typography>
         </CardContent>
-
-        <CardActions>
+        <CardActions className={classes.cardActions}>
           <Button size="small" color="primary">
             Learn More
           </Button>
