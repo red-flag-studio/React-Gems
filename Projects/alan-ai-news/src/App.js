@@ -7,16 +7,19 @@ const ALAN_KEY =
 
 export default function App() {
   const classes = useStyles();
+  const [activeArticle, setActiveArticle] = useState(-1);
   const [newsArticles, setNewsArticles] = useState([]);
   useEffect(() => {
     alanBtn({
       key: ALAN_KEY,
-      onCommand: ({ command, articles }) => {
+      onCommand: ({ command, articles, article }) => {
         switch (command) {
-          case "newHeadlines":
-          case "termNews":
-          case "latestNews":
+          case "news":
             setNewsArticles(articles);
+            setActiveArticle(-1);
+            break;
+          case "highlight":
+            setActiveArticle((prev) => prev + 1);
             break;
         }
       },
@@ -31,7 +34,7 @@ export default function App() {
           alt="Alan Logo"
         />
       </div>
-      <NewsCards articles={newsArticles} />
+      <NewsCards articles={newsArticles} activeArticle={activeArticle} />
     </div>
   );
 }

@@ -3,7 +3,7 @@ import NewsCard from "./NewsCard/NewsCard";
 import { Grid, Grow, Typography } from "@material-ui/core";
 import useStyles from "./Styles";
 
-export default function NewsCards({ articles }) {
+export default function NewsCards({ articles, activeArticle }) {
   const classes = useStyles();
 
   const infoCards = [
@@ -37,8 +37,9 @@ export default function NewsCards({ articles }) {
           alignItems="stretch"
           spacing={3}
         >
-          {infoCards.map((infoCard) => (
+          {infoCards.map((infoCard, index) => (
             <Grid
+              key={index}
               item
               xs={12}
               sm={6}
@@ -54,14 +55,14 @@ export default function NewsCards({ articles }) {
                 {infoCard.info && (
                   <Typography variant="h6">
                     <strong>{infoCard.title.split(" ")[2]}</strong>
-                     <br />
+                    <br />
                     {infoCard.info}
                   </Typography>
                 )}
                 <Typography variant="h6">
                   Try saying : <br />
                   <i>{infoCard.text}</i>
-                </Typography> 
+                </Typography>
               </div>
             </Grid>
           ))}
@@ -87,7 +88,11 @@ export default function NewsCards({ articles }) {
             lg={3}
             style={{ display: "flex" }}
           >
-            <NewsCard article={article} i={index} />
+            <NewsCard
+              article={article}
+              i={index}
+              active={index == activeArticle}
+            />
           </Grid>
         ))}
       </Grid>

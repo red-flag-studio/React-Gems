@@ -9,14 +9,18 @@ import {
   Typography,
 } from "@material-ui/core";
 import useStyles from "./Styles";
+import classNames from "classnames";
 
 export default function NewsCard({
   article: { description, publishedAt, source, title, urlToImage, url },
   i,
+  active,
 }) {
   const classes = useStyles();
   return (
-    <Card className={classes.card}>
+    <Card
+      className={classNames(classes.card, active ? classes.activeCard : null)}
+    >
       <CardActionArea href={url} target="_blank">
         <CardMedia
           className={classes.media}
